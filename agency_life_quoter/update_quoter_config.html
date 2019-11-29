@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Update Quoter Config Callback</title>
+  </head>
+  <body>
+    <link href='https://alq.ixn.tech/css/reset.css' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      window.IXN_QUOTER_CONFIG = {
+        id: 'YOUR_ALQ_ID',
+      };
+    </script>
+    <div id='ixn-agency-quoter'></div>
+    <script type='text/javascript' src='https://alq.ixn.tech/js/alq.widget.js'></script>
+    <script type='text/javascript'>
+      // Make sure the method is available (this should be adjusted to fit your use case)
+      setTimeout(function () {
+        if (window.IXN && window.IXN.update_quoter_config) {
+          window.IXN.update_quoter_config({
+            agent: {
+              first_name: 'Joe', // String
+              last_name: 'Agent', // String,
+              phone: '5555555555', // String: 10 digit U.S. phone number
+              email: 'joeagent@ixn.tech', // String
+              insurance_license_number: '123456789', // String
+
+              // Must have our ApplicInt integration enabled
+              applicint_trusted_code: '123ABC456' // String
+            },
+
+            // Pre-fill the Client information
+            // Invalid values could result in bad Quote requests
+            client: {
+              name: 'Sally Client'
+            },
+
+            quote_data: {
+              // Pass ages OR date of birth, not both
+              current_age: 30, // Integer
+              nearest_age: 31, // Integer: must be the current age or 1 year more, whichever is closest
+              dob_year: '1980', // String: must be 4 digits
+              dob_month: '02', // String: must be 2 digits. Use leading zeros for single digit months
+              dob_day: '01', // String: must be 2 digits. Use leading zeros for single digit days
+
+              gender: 'Male', // String: one of these values: 'Male', 'Female'
+              tobacco: false, // Boolean
+              state: 'UT', // String: a valid two character state abbreviation
+              health_categories: ['Preferred'], /* Array of Strings: Any of these values:
+                'Standard',
+                'Standard Plus',
+                'Preferred',
+                'Preferred Plus',
+                'Table A',
+                'Table B',
+                'Table C',
+                'Table D',
+                'Table E',
+                'Table F',
+                'Table G',
+                'Table H',
+                'Table I',
+                'Table J',
+                'Table K',
+                'Table L',
+                'Table M',
+                'Table N',
+                'Table O',
+                'Table P'
+              */
+              face_amount: 250000, // Integer
+              flat_extra: '1.00', // String: format as dollar.cents. No special characters.
+              carrier_ids: [140], // Array of Integers: Get a list of carriers at https://grapeshot.ixn.tech/v1/carriers
+              product_types: ['20 Year Term'], // Array of Strings: Any of the values from https://grapeshot.ixn.tech/v1/product_types
+              riders: ['adb_rider'], // Array of Strings: Any of these values: 'adb_rider', 'wop_rider'
+              child_rider_units: 2 // Integer
+            },
+
+            // Agency Life Quoter quote actions allow you to send quote information to only forms and custom urls.
+            // If you are utilizing these, then you may have the need to pass custom parameters.
+            // For example, you might need to pass a user_id with the quote data so you can associate the quote with a user in your system.
+            quote_params: [{
+              name: 'your_custom_params', // The name of the query string parameter. This should use a snake case format.
+              value: 'Custom Param Value' // The value of the query string parameter. This will be url encoded.
+            }]
+          });
+        }
+      }, 5000);
+    </script>
+  </body>
+</html>
