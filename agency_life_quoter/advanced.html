@@ -22,10 +22,14 @@
         // Set the color used in the UI
         color: '#017777',
 
-        // Limit the Carriers, Products, and Product Types available to quote
-        carrier_ids: [69], // Array of Integers: Get a list of carriers at https://grapeshot.ixn.tech/v1/carriers
-        product_ids: [39, 40, 42, 43, 53, 54], // Array of Integers: Get a list of a carrier's products at https://grapeshot.ixn.tech/v1/products?carrier_id=:carrier_id
-        product_types: ['20 Year Term', '30 Year Term'], // Array of String: any of the values from https://grapeshot.ixn.tech/v1/product_types
+        // This gives you the ability to limit which carriers are available to quote. It will override any Dashboard configuration for carriers.
+        carrier_ids: [69], // Array of Integers: Get a list of carriers at https://api.ixn.tech/v1/carriers
+
+        // This gives you the ability to limit which products are quoted.
+        product_ids: [39, 40, 42, 43, 53, 54], // Array of Integers: Get a list of a carrier's products at https://api.ixn.tech/v1/products?carrier_id=:carrier_id
+
+        // This gives you the ability to limit which product types are available to choose. It will override any Dashboard configuration for product types.
+        product_types: ['20 Year Term', '30 Year Term'], // Array of String: any of the values from https://api.ixn.tech/v1/product_types
 
         // Pre-fill the Agent information
         agent: {
@@ -41,7 +45,8 @@
 
         // Pre-fill the Client information
         client: {
-          name: 'Sally Client'
+          first_name: 'Sally',
+          last_name: 'Client'
         },
 
         // Pre-fill the Quote information
@@ -56,32 +61,15 @@
           gender: 'Male', // String: one of these values: 'Male', 'Female'
           tobacco: false, // Boolean
           state: 'UT', // String: a valid two character state abbreviation
+          // Set which health categories are pre-selected
           health_categories: ['Preferred'], /* Array of Strings: Any of these values:
-            'Standard',
-            'Standard Plus',
-            'Preferred',
-            'Preferred Plus',
-            'Table A',
-            'Table B',
-            'Table C',
-            'Table D',
-            'Table E',
-            'Table F',
-            'Table G',
-            'Table H',
-            'Table I',
-            'Table J',
-            'Table K',
-            'Table L',
-            'Table M',
-            'Table N',
-            'Table O',
-            'Table P'
+            'Standard', 'Standard Plus', 'Preferred', 'Preferred Plus', 'Table A', 'Table B', 'Table C', 'Table D', 'Table E', 'Table F', 'Table G', 'Table H', 'Table I', 'Table J', 'Table K', 'Table L', 'Table M', 'Table N', 'Table O', 'Table P'
           */
           face_amount: 250000, // Integer
           flat_extra: '1.00', // String: format as dollar.cents. No special characters.
-          carrier_ids: [69], // Array of Integers: Get a list of carriers at https://grapeshot.ixn.tech/v1/carriers
-          product_types: ['20 Year Term'], // Array of Strings: Any of the values from https://grapeshot.ixn.tech/v1/product_types
+          carrier_ids: [69], // Array of Integers: Get a list of carriers at https://api.ixn.tech/v1/carriers
+          // Set which product types are pre-selected
+          product_types: ['20 Year Term'], // Array of Strings: Any of the values from https://api.ixn.tech/v1/product_types
           riders: ['adb_rider'], // Array of Strings: Any of these values: 'adb_rider', 'wop_rider'
           child_rider_units: 2 // Integer
         },
